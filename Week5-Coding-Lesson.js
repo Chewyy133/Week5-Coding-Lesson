@@ -71,7 +71,7 @@ class Menu {
     showShopMenuOptions(shopInfo) {
         return prompt (`
         0) Back
-        1) Create flavor
+        1) Add flavor
         2) Delete flavor
         ---------------------
         ${shopInfo}
