@@ -104,7 +104,7 @@ class Menu {
             let selection = this.showShopMenuOptions(description)
             switch (selection) {
                 case '1':
-                    this.createFlavor();
+                    this.addFlavor();
                     break;
                 case '2':
                     this.deleteFlavor();    
@@ -119,8 +119,8 @@ class Menu {
         }
     }
 
-    createFlavor() {
-        let flavor = prompt('Enter name of new flavor:');
+    addFlavor() {
+        let flavor = prompt('Enter flavor you want:');
         this.selectedShop.flavors.push(new Icecream(flavor));
     }
 
