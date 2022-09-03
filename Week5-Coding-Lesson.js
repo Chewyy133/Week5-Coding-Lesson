@@ -61,10 +61,10 @@ class Menu {
     showMainMenuOptions() {
         return prompt (`
         0) Exit
-        1) Choose new shop name
-        2) View shop names selected
-        3) Delete a shop name
-        4) Display all the shop names
+        1) Choose ice cream shop
+        2) View ice cream shops selected
+        3) Delete an ice cream shop 
+        4) Display all the ice cream shops
         `);
     }
 
@@ -87,7 +87,7 @@ class Menu {
     }
 
     createShop() {
-        let name = prompt('Enter name of shop you want ice cream from:');
+        let name = prompt('Enter name of a shop you want ice cream from:');
         this.shops.push(new Shop(name));
     }
 
@@ -95,7 +95,7 @@ class Menu {
         let index = prompt('Enter the index of the shop you want to go to:');
         if (index > -1 && index < this.shops.length) {
             this.selectedShop = this.shops[index];
-            let description = 'Shop Name: ' + this.selectedShop.name + '\n';
+            let description = 'Ice Cream Shop Name: ' + this.selectedShop.name + '\n';
             
             for(let i = 0; i < this.selectedShop.flavors.length; i++) {
                 description += i + ') ' + this.selectedShop.flavors[i].flavor + '\n';
@@ -113,9 +113,9 @@ class Menu {
     }
 
     deleteShop() {
-        let index = prompt('Enter the index of the flavor you want to delete:');
-        if (index > -1 && index < this.flavors.length) {
-            this.flavors.splice(index, 1);
+        let index = prompt('Enter the index of the shop you want to delete:');
+        if (index > -1 && index < this.shops.length) {
+            this.shops.splice(index, 1);
         }
     }
 
