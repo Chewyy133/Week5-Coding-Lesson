@@ -1,10 +1,10 @@
-class IceCream {
+class Icecream {
     constructor(flavor) {
         this.flavor = flavor;
     }
 
     describe() {
-        return `${this.flavor} goes ${this.cone}.`;
+        return `${this.flavor}.`;
     }
 }
 
@@ -15,10 +15,10 @@ class Shop {
     }
 
     addFlavor(flavor) {
-        if (flavor instanceof IceCream) {
+        if (flavor instanceof Icecream) {
             this.flavors.push(flavor);
         } else {
-            throw new Error(`You can only add an instance of IceCream. Argument is not a player: ${flavor}`);
+            throw new Error(`You can only add an instance of Icecream. Argument is not a player: ${flavor}`);
         }
     }
 
@@ -38,7 +38,7 @@ class Menu {
         while (selection != 0) {
             switch (selection) {
                 case '1':
-                    this.chooseShop();
+                    this.createShop();
                     break;
                 case '2':
                     this.viewShop();
@@ -47,7 +47,7 @@ class Menu {
                     this.deleteShop();
                     break;
                 case '4':
-                    this.displayShops();
+                    this.displayShop();
                     break;
                 default:
                     selection = 0                
@@ -55,35 +55,35 @@ class Menu {
             selection = this.showMainMenuOptions();
         }
 
-        alert('Error, try again!');
+        alert('Goodbye!');
     }
 
     showMainMenuOptions() {
         return prompt (`
-        0) exit
-        1) choose new shop name
-        2) view shop names selected
-        3) delete a shop name
-        4) display all the shop names
+        0) Exit
+        1) Choose new shop name
+        2) View shop names selected
+        3) Delete a shop name
+        4) Display all the shop names
         `);
     }
 
     showShopMenuOptions(shopInfo) {
         return prompt (`
-        0) back
-        1) create flavor
-        2) delete flavor
+        0) Back
+        1) Create flavor
+        2) Delete flavor
         ---------------------
         ${shopInfo}
         `);
     }
 
-    displayShops() {
-        let nameString = '';
+    displayShop() {
+        let shopString = '';
         for (let i = 0; i < this.shops.length; i++) {
-          nameString += i + ') ' + this.shops[i].name + '\n';
+          shopString += i + ') ' + this.shops[i].name + '\n';
         }
-        alert(nameString);
+        alert(shopString);
     }
 
     createShop() {
@@ -94,11 +94,11 @@ class Menu {
     viewShop() {
         let index = prompt('Enter the index of the shop you want to go to:');
         if (index > -1 && index < this.shops.length) {
-            this.selectedShop = this.name[index];
+            this.selectedShop = this.shops[index];
             let description = 'Shop Name: ' + this.selectedShop.name + '\n';
             
-            for(let i = 0; i < this.selectedShop.shops.length; i++) {
-                description += i + ') ' + this.selectedShop.shops[i].name + ' - ' + this.selectedShop.shops[i].flavors + '\n';
+            for(let i = 0; i < this.selectedShop.flavors.length; i++) {
+                description += i + ') ' + this.selectedShop.flavors[i].flavor + '\n';
             }
 
             let selection = this.showShopMenuOptions(description)
@@ -109,6 +109,25 @@ class Menu {
                 case '2':
                     this.deleteFlavor();    
             }
+        }
+    }
+
+    deleteShop() {
+        let index = prompt('Enter the index of the flavor you want to delete:');
+        if (index > -1 && index < this.flavors.length) {
+            this.flavors.splice(index, 1);
+        }
+    }
+
+    createFlavor() {
+        let flavor = prompt('Enter name of new flavor:');
+        this.selectedShop.flavors.push(new Icecream(flavor));
+    }
+
+    deleteFlavor() {
+        let index = prompt('Enter the index of the flavor you wish to delete:');
+        if (index > -1 && index < this.selectedShop.flavors.length) {
+            this.selectedShop.flavors.splice(index, 1);
         }
     }
 }
